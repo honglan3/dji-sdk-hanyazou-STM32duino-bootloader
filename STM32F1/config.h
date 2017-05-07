@@ -284,6 +284,25 @@
 	#define LED_PIN 			3
 	#define LED_ON_STATE		0
 	
+#elif defined TARGET_SUSHIBITS_F103
+
+	#define HAS_SUSHIBITS_HARDWARE	1
+
+	// PB2
+	#define LED_BANK		GPIOB
+	#define LED_PIN 		2
+	#define LED_ON_STATE		1
+	#define BOOTLOADER_WAIT		10
+
+	// PA0
+	#define BUTTON_BANK		GPIOE
+	#define BUTTON_PIN		5
+	#define BUTTON_PRESSED_STATE	1
+
+	/* USB Disc Pin Setup.   USB DISC is PC13 */
+	#define USB_DISC_BANK		GPIOC
+	#define USB_DISC_PIN		13
+
 #elif defined TARGET_GENERIC_F103_PB12
 	
 	#define LED_BANK			GPIOB 

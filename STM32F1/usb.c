@@ -48,6 +48,10 @@ void setupUSB (void) {
   //pRCC->APB1ENR |= RCC_APB1ENR_USB_CLK;// done in setupCLK()
 
   gpio_write_bit(USB_DISC_BANK,USB_DISC_PIN,0);  /* present ourselves to the host */
+#elif defined HAS_SUSHIBITS_HARDWARE
+  /* Setup USB DISC pin as output push/pull */	
+  SET_REG(GPIO_CR(USB_DISC_BANK,USB_DISC_PIN),(GET_REG(GPIO_CR(USB_DISC_BANK,USB_DISC_PIN)) & crMask(USB_DISC_PIN)) | CR_OUTPUT_PP << CR_SHITF(USB_DISC_PIN));  
+  gpio_write_bit(USB_DISC_BANK,USB_DISC_PIN,1);  /* present ourselves to the host */
 #else
 
 /* Generic boards don't have disconnect hardware, so we drive PA12 which is connected to the usb D+ line*/

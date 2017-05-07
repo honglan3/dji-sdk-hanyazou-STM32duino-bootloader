@@ -129,6 +129,7 @@ generic-pb7: begin clean gccversion build_generic-pb7 sizeafter finished  copy_g
 generic-pb0: begin clean gccversion build_generic-pb0 sizeafter finished  copy_generic-pb0 end
 stbee :  begin clean gccversion build_stbee sizeafter finished  copy_stbee end
 naze32: begin clean gccversion build_naze32 sizeafter finished  copy_naze32 end
+sushibits-f103: begin clean gccversion build_sushibits-f103 sizeafter finished  copy_sushibits-f103 end
 generic-pb12: begin clean gccversion build_generic-pb12 sizeafter finished  copy_generic-pb12 end
 hytiny-stm32f103t: begin clean gccversion build_hytiny-stm32f103t sizeafter finished  copy_hytiny-stm32f103t end
 build: elf bin lss sym
@@ -329,6 +330,17 @@ copy_naze32:
 	@echo
 	cp $(TARGET).bin binaries/naze32_boot20.bin
 	@echo	
+	
+build_sushibits-f103: TARGETFLAGS= -DTARGET_SUSHIBITS_F103
+# Set the linker script
+build_sushibits-f103: LDFLAGS +=-T$(ST_LIB)/c_only_md_high_density.ld
+build_sushibits-f103: elf bin lss sym
+copy_sushibits-f103: 
+	@echo
+	@echo "Copying to binaries folder"
+	@echo
+	cp $(TARGET).bin binaries/sushibits_boot20_f103.bin
+	@echo		
 	
 build_generic-pb12: TARGETFLAGS= -DTARGET_GENERIC_F103_PB12
 # Set the linker script
